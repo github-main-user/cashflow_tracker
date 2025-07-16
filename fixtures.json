@@ -1,0 +1,150 @@
+[
+{
+    "model": "records.cashflowrecord",
+    "pk": 1,
+    "fields": {
+        "date": "2025-07-15",
+        "status": 2,
+        "flow_type": 2,
+        "category": 2,
+        "subcategory": 4,
+        "amount": "15000.00",
+        "comment": "Bought a monitor on avito"
+    }
+},
+{
+    "model": "records.cashflowrecord",
+    "pk": 2,
+    "fields": {
+        "date": "2025-07-12",
+        "status": 1,
+        "flow_type": 2,
+        "category": 1,
+        "subcategory": 1,
+        "amount": "1200.00",
+        "comment": "Monthly VPS rental"
+    }
+},
+{
+    "model": "records.cashflowrecord",
+    "pk": 3,
+    "fields": {
+        "date": "2025-06-12",
+        "status": 1,
+        "flow_type": 2,
+        "category": 1,
+        "subcategory": 1,
+        "amount": "1500.00",
+        "comment": "Monthly VPS rental"
+    }
+},
+{
+    "model": "records.cashflowrecord",
+    "pk": 4,
+    "fields": {
+        "date": "2025-05-12",
+        "status": 1,
+        "flow_type": 2,
+        "category": 1,
+        "subcategory": 1,
+        "amount": "1500.00",
+        "comment": "Monthly VPS rental"
+    }
+},
+{
+    "model": "records.cashflowrecord",
+    "pk": 5,
+    "fields": {
+        "date": "2025-04-20",
+        "status": 2,
+        "flow_type": 2,
+        "category": 2,
+        "subcategory": 4,
+        "amount": "25000.00",
+        "comment": "Bought a RTX 1080 GPU on avito"
+    }
+},
+{
+    "model": "references.status",
+    "pk": 1,
+    "fields": {
+        "name": "Business"
+    }
+},
+{
+    "model": "references.status",
+    "pk": 2,
+    "fields": {
+        "name": "Personal"
+    }
+},
+{
+    "model": "references.status",
+    "pk": 3,
+    "fields": {
+        "name": "Tax"
+    }
+},
+{
+    "model": "references.flowtype",
+    "pk": 1,
+    "fields": {
+        "name": "Income"
+    }
+},
+{
+    "model": "references.flowtype",
+    "pk": 2,
+    "fields": {
+        "name": "Expense"
+    }
+},
+{
+    "model": "references.category",
+    "pk": 1,
+    "fields": {
+        "name": "Infrastructure",
+        "flow_type": 2
+    }
+},
+{
+    "model": "references.category",
+    "pk": 2,
+    "fields": {
+        "name": "Marketing",
+        "flow_type": 2
+    }
+},
+{
+    "model": "references.subcategory",
+    "pk": 1,
+    "fields": {
+        "name": "VPS",
+        "category": 1
+    }
+},
+{
+    "model": "references.subcategory",
+    "pk": 2,
+    "fields": {
+        "name": "Proxy",
+        "category": 1
+    }
+},
+{
+    "model": "references.subcategory",
+    "pk": 3,
+    "fields": {
+        "name": "Farpost",
+        "category": 2
+    }
+},
+{
+    "model": "references.subcategory",
+    "pk": 4,
+    "fields": {
+        "name": "Avito",
+        "category": 2
+    }
+}
+]

@@ -136,7 +136,7 @@ def test_create_record_with_date_success(
     response = api_client.post(
         reverse("records:record-list"),
         {
-            "date": "2099-3-1",
+            "date": "2000-3-1",
             "status": status_obj.id,
             "flow_type": flow_type_obj.id,
             "category": category_obj.id,

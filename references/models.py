@@ -7,7 +7,7 @@ class Status(models.Model):
     name = models.CharField(max_length=100, unique=True, help_text="Name of the status")
 
     def __str__(self) -> str:
-        return f"Status: {self.name}"
+        return self.name
 
     class Meta:
         verbose_name = "Status"
@@ -22,7 +22,7 @@ class FlowType(models.Model):
     )
 
     def __str__(self) -> str:
-        return f"FlowType: {self.name}"
+        return self.name
 
     class Meta:
         verbose_name = "Flow Type"
@@ -38,7 +38,7 @@ class Category(models.Model):
     )
 
     def __str__(self) -> str:
-        return f"Category: {self.name} for {self.flow_type.name}"
+        return self.name
 
     class Meta:
         constraints = [
@@ -59,7 +59,7 @@ class SubCategory(models.Model):
     )
 
     def __str__(self) -> str:
-        return f"SubCategory: {self.name} for {self.category.name}"
+        return self.name
 
     class Meta:
         constraints = [

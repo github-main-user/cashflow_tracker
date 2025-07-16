@@ -1,4 +1,5 @@
 import pytest
+from django.db.models.deletion import ProtectedError
 from django.urls import reverse
 from rest_framework import status
 
@@ -92,6 +93,14 @@ def test_status_delete_success(api_client, status_obj):
     assert not Status.objects.filter(id=status_obj.id).exists()
 
 
+@pytest.mark.django_db
+def test_status_delete_in_use_fail(api_client, status_obj, record_obj):
+    with pytest.raises(ProtectedError):
+        api_client.delete(reverse("references:status-detail", args=[status_obj.id]))
+
+    assert Status.objects.filter(id=status_obj.id).exists()
+
+
 # ===========
 #  flow_type
 # ===========
@@ -181,6 +190,16 @@ def test_flow_type_delete_success(api_client, flow_type_obj):
 
     assert response.status_code == status.HTTP_204_NO_CONTENT
     assert not FlowType.objects.filter(id=flow_type_obj.id).exists()
+
+
+@pytest.mark.django_db
+def test_flow_type_delete_in_use_fail(api_client, flow_type_obj, record_obj):
+    with pytest.raises(ProtectedError):
+        api_client.delete(
+            reverse("references:flow_type-detail", args=[flow_type_obj.id])
+        )
+
+    assert FlowType.objects.filter(id=flow_type_obj.id).exists()
 
 
 # ==========
@@ -276,6 +295,14 @@ def test_category_delete_success(api_client, category_obj):
     assert not Category.objects.filter(id=category_obj.id).exists()
 
 
+@pytest.mark.django_db
+def test_category_delete_in_use_fail(api_client, category_obj, record_obj):
+    with pytest.raises(ProtectedError):
+        api_client.delete(reverse("references:category-detail", args=[category_obj.id]))
+
+    assert Category.objects.filter(id=category_obj.id).exists()
+
+
 # =============
 #  subcategory
 # =============
@@ -369,3 +396,13 @@ def test_subcategory_delete_success(api_client, subcategory_obj):
 
     assert response.status_code == status.HTTP_204_NO_CONTENT
     assert not SubCategory.objects.filter(id=subcategory_obj.id).exists()
+
+
+@pytest.mark.django_db
+def test_subcategory_delete_in_use_fail(api_client, subcategory_obj, record_obj):
+    with pytest.raises(ProtectedError):
+        api_client.delete(
+            reverse("references:subcategory-detail", args=[subcategory_obj.id])
+        )
+
+    assert SubCategory.objects.filter(id=subcategory_obj.id).exists()

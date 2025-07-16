@@ -5,21 +5,6 @@ from rest_framework import status
 from records.models import CashFlowRecord
 from references.models import Category, FlowType
 
-
-@pytest.fixture
-def record_obj(
-    db, status_obj, flow_type_obj, category_obj, subcategory_obj
-) -> CashFlowRecord:
-    return CashFlowRecord.objects.create(
-        status=status_obj,
-        flow_type=flow_type_obj,
-        category=category_obj,
-        subcategory=subcategory_obj,
-        amount=15.2,
-        comment="test comment",
-    )
-
-
 # list
 
 

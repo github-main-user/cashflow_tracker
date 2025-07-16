@@ -2,22 +2,32 @@ from django.db import models
 
 
 class Status(models.Model):
-    name = models.CharField(max_length=100, unique=True)
+    """Model for storing cash flow record status."""
+
+    name = models.CharField(max_length=100, unique=True, help_text="Name of the status")
 
     def __str__(self) -> str:
         return f"Status: {self.name}"
 
 
 class FlowType(models.Model):
-    name = models.CharField(max_length=100, unique=True)
+    """Model for storing cash flow type."""
+
+    name = models.CharField(
+        max_length=100, unique=True, help_text="Name of the cash flow type"
+    )
 
     def __str__(self) -> str:
         return f"FlowType: {self.name}"
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=100)
-    flow_type = models.ForeignKey(FlowType, on_delete=models.CASCADE)
+    """Model for storing cash flow record category."""
+
+    name = models.CharField(max_length=100, help_text="Name of the category")
+    flow_type = models.ForeignKey(
+        FlowType, on_delete=models.CASCADE, help_text="Connected cash flow type"
+    )
 
     def __str__(self) -> str:
         return f"Category: {self.name} for {self.flow_type.name}"
@@ -31,8 +41,12 @@ class Category(models.Model):
 
 
 class SubCategory(models.Model):
-    name = models.CharField(max_length=100)
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    """Model for storing cash flow record subcategory."""
+
+    name = models.CharField(max_length=100, help_text="Name of the subcategory")
+    category = models.ForeignKey(
+        Category, on_delete=models.CASCADE, help_text="Connected category"
+    )
 
     def __str__(self) -> str:
         return f"SubCategory: {self.name} for {self.category.name}"

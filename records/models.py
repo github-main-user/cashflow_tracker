@@ -8,15 +8,36 @@ from references.models import Category, FlowType, Status, SubCategory
 
 
 class CashFlowRecord(models.Model):
-    date = models.DateField(default=date.today)
-    status = models.ForeignKey(Status, on_delete=models.PROTECT)
-    flow_type = models.ForeignKey(FlowType, on_delete=models.PROTECT)
-    category = models.ForeignKey(Category, on_delete=models.PROTECT)
-    subcategory = models.ForeignKey(SubCategory, on_delete=models.PROTECT)
-    amount = models.DecimalField(
-        max_digits=10, decimal_places=2, validators=[MinValueValidator(0)]
+    """Model for storing cash flow records."""
+
+    date = models.DateField(
+        default=date.today,
+        help_text="Date of creation of the record "
+        "(Optional, If is not specified, will be used today's date)",
     )
-    comment = models.TextField(blank=True)
+    status = models.ForeignKey(
+        Status, on_delete=models.PROTECT, help_text="Status of the record"
+    )
+    flow_type = models.ForeignKey(
+        FlowType,
+        on_delete=models.PROTECT,
+        help_text="Type of the cash flow (must match the type in category)",
+    )
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.PROTECT,
+        help_text="Category of the record (must match the category in subcategory)",
+    )
+    subcategory = models.ForeignKey(
+        SubCategory, on_delete=models.PROTECT, help_text="Subcategory of the record"
+    )
+    amount = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        validators=[MinValueValidator(0)],
+        help_text="Amount in rub.",
+    )
+    comment = models.TextField(blank=True, help_text="Optional Comment")
 
     def __str__(self) -> str:
         return f"CashFlowRecord: {self.date} - {self.status} - {self.amount} rub."
@@ -37,4 +58,3 @@ class CashFlowRecord(models.Model):
         indexes = [
             models.Index(fields=["date"]),
         ]
-

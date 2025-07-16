@@ -58,3 +58,5 @@ class CashFlowRecord(models.Model):
         indexes = [
             models.Index(fields=["date"]),
         ]
+        verbose_name = "Cash Flow Record"
+        verbose_name_plural = "Cash Flow Records"

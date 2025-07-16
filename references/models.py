@@ -9,6 +9,10 @@ class Status(models.Model):
     def __str__(self) -> str:
         return f"Status: {self.name}"
 
+    class Meta:
+        verbose_name = "Status"
+        verbose_name_plural = "Statuses"
+
 
 class FlowType(models.Model):
     """Model for storing cash flow type."""
@@ -19,6 +23,10 @@ class FlowType(models.Model):
 
     def __str__(self) -> str:
         return f"FlowType: {self.name}"
+
+    class Meta:
+        verbose_name = "Flow Type"
+        verbose_name_plural = "Flow Types"
 
 
 class Category(models.Model):
@@ -38,6 +46,8 @@ class Category(models.Model):
                 fields=("name", "flow_type"), name="unique_category_per_flow_type"
             )
         ]
+        verbose_name = "Category"
+        verbose_name_plural = "Categories"
 
 
 class SubCategory(models.Model):
@@ -57,3 +67,5 @@ class SubCategory(models.Model):
                 fields=("name", "category"), name="unique_subcategory_per_category"
             )
         ]
+        verbose_name = "Subcategory"
+        verbose_name_plural = "Subcategories"

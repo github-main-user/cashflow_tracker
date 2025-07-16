@@ -40,7 +40,7 @@ class CashFlowRecord(models.Model):
     comment = models.TextField(blank=True, help_text="Optional Comment")
 
     def __str__(self) -> str:
-        return f"CashFlowRecord: {self.date} - {self.status} - {self.amount} rub."
+        return f"{self.date} - {self.status} - {self.amount} rub."
 
     def clean(self) -> None:
         if self.category.flow_type != self.flow_type:

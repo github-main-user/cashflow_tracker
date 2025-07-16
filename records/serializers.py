@@ -21,8 +21,8 @@ class CashFlowRecordSerializer(serializers.ModelSerializer):
         )
 
     def validate_date(self, value):
-        if value < timezone.now().date():
-            raise serializers.ValidationError("Date must be in the future.")
+        if value > timezone.now().date():
+            raise serializers.ValidationError("Date can't be in the future.")
         return value
 
     def validate(self, attrs):

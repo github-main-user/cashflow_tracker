@@ -3,6 +3,7 @@ from datetime import date
 from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator
 from django.db import models
+from django.utils import timezone
 
 from references.models import Category, FlowType, Status, SubCategory
 
@@ -52,6 +53,9 @@ class CashFlowRecord(models.Model):
             raise ValidationError(
                 {"subcategory": "Subcategory doesn't belong to given category"}
             )
+
+        if self.date > timezone.now().date():
+            raise ValidationError({"date": "Date can't be in the future."})
 
     class Meta:
         ordering = ["-date"]

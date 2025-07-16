@@ -2,7 +2,12 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters, viewsets
 
 from .models import Category, FlowType, Status, SubCategory
-from .serializers import StatusSerializer
+from .serializers import (
+    CategorySerializer,
+    FlowTypeSerializer,
+    StatusSerializer,
+    SubCategorySerializer,
+)
 
 
 class StatusViewSet(viewsets.ModelViewSet):
@@ -15,7 +20,7 @@ class StatusViewSet(viewsets.ModelViewSet):
 
 class FlowTypeViewSet(viewsets.ModelViewSet):
     queryset = FlowType.objects.all()
-    serializer_class = StatusSerializer
+    serializer_class = FlowTypeSerializer
 
     filter_backends = (filters.SearchFilter,)
     search_field = ("name",)
@@ -23,7 +28,7 @@ class FlowTypeViewSet(viewsets.ModelViewSet):
 
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
-    serializer_class = StatusSerializer
+    serializer_class = CategorySerializer
 
     filter_backends = (DjangoFilterBackend, filters.SearchFilter)
     filterset_fields = ("flow_type",)
@@ -32,7 +37,7 @@ class CategoryViewSet(viewsets.ModelViewSet):
 
 class SubCategoryViewSet(viewsets.ModelViewSet):
     queryset = SubCategory.objects.all()
-    serializer_class = StatusSerializer
+    serializer_class = SubCategorySerializer
 
     filter_backends = (DjangoFilterBackend, filters.SearchFilter)
     filterset_fields = ("category",)

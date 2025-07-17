@@ -1,12 +1,12 @@
 from datetime import date
 
-from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator
 from django.db import models
-from django.utils import timezone
 
 from references.models import Category, FlowType, Status, SubCategory
 from references.services import ensure_category_consistency
+
+from .validators import validate_date_not_in_future
 
 
 class CashFlowRecord(models.Model):
@@ -14,6 +14,7 @@ class CashFlowRecord(models.Model):
 
     date = models.DateField(
         default=date.today,
+        validators=[validate_date_not_in_future],
         help_text="Date of creation of the record "
         "(Optional, If is not specified, will be used today's date)",
     )
@@ -46,9 +47,6 @@ class CashFlowRecord(models.Model):
 
     def clean(self) -> None:
         ensure_category_consistency(self.flow_type, self.category, self.subcategory)
-
-        if self.date > timezone.now().date():
-            raise ValidationError({"date": "Date can't be in the future."})
 
     class Meta:
         ordering = ["-date"]

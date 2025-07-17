@@ -1,4 +1,3 @@
-from django.utils import timezone
 from rest_framework import serializers
 
 from references.services import ensure_category_consistency
@@ -21,11 +20,6 @@ class CashFlowRecordSerializer(serializers.ModelSerializer):
             "amount",
             "comment",
         )
-
-    def validate_date(self, value):
-        if value > timezone.now().date():
-            raise serializers.ValidationError("Date can't be in the future.")
-        return value
 
     def validate(self, attrs):
         instance = self.instance

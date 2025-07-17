@@ -12,7 +12,7 @@ def test_wrong_flow_type_type_clean_fail(record_obj):
             flow_type=FlowType.objects.create(name="new type"),
             category=record_obj.category,
             subcategory=record_obj.subcategory,
-            amount=15.2,
+            amount=15.5,
             comment="test comment",
         )
         record.full_clean()
@@ -27,7 +27,7 @@ def test_wrong_category_clean_fail(record_obj):
                 name="name", flow_type=record_obj.flow_type
             ),
             subcategory=record_obj.subcategory,
-            amount=15.2,
+            amount=15.5,
             comment="test comment",
         )
         record.full_clean()
@@ -41,7 +41,7 @@ def test_date_in_future_clean_fail(record_obj):
             flow_type=record_obj.flow_type,
             category=record_obj.category,
             subcategory=record_obj.subcategory,
-            amount=15.2,
+            amount=15.5,
             comment="test comment",
         )
         record.full_clean()

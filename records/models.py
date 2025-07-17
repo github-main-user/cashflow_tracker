@@ -6,6 +6,7 @@ from django.db import models
 from django.utils import timezone
 
 from references.models import Category, FlowType, Status, SubCategory
+from references.services import ensure_category_consistency
 
 
 class CashFlowRecord(models.Model):
@@ -44,15 +45,7 @@ class CashFlowRecord(models.Model):
         return f"{self.date} - {self.status} - {self.amount} rub."
 
     def clean(self) -> None:
-        if self.category.flow_type != self.flow_type:
-            raise ValidationError(
-                {"category": "Category doesn't belong to given flow_type"}
-            )
-
-        if self.subcategory.category != self.category:
-            raise ValidationError(
-                {"subcategory": "Subcategory doesn't belong to given category"}
-            )
+        ensure_category_consistency(self.flow_type, self.category, self.subcategory)
 
         if self.date > timezone.now().date():
             raise ValidationError({"date": "Date can't be in the future."})

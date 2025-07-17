@@ -19,13 +19,7 @@ services:
 
   web:
     build: .
-    environment:
-      - DJANGO_SUPERUSER_USERNAME=admin
-      - DJANGO_SUPERUSER_EMAIL=admin@admin.com
-      - DJANGO_SUPERUSER_PASSWORD=veryhard
     command: bash -c "python manage.py migrate &&
-                      python manage.py loaddata fixtures.json &&
-                      python manage.py createsuperuser --noinput || true &&
                       python manage.py runserver 0.0.0.0:8000"
     env_file: .env
     ports:

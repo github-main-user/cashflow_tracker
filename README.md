@@ -2,10 +2,11 @@
 
 An application that helps you to track your cash flow. 
 
-The primary focus is on API, documentation, and tests.
+The primary focus is on API, architecture, documentation, and tests.
 
-For convenient user expirience you can use the admin panel. *(see information in `Usage` section below)*
-Sample data has been loaded using fixtures for demonstration purposes in the admin panel.
+For convenient user expirience you can use the admin panel *(see the information in `Usage` section below)*.
+
+For demonstration purposase in admin panel - some sample data has been prepared in fixtures *(automatically being loaded via docker)*.
 
 
 ## Tech Stack
@@ -48,13 +49,12 @@ After start, the application will be available on `http://localhost:8000/`.
 
 - `http://localhost:8000/api/v1/docs/` - swagger documentation
 - `http://localhost:8000/api/v1/redoc/` - redoc documentation
-
 - `http://localhost:8000/admin/` - admin panel
 
-### default admin's username and password:
-username: admin
-*email: admin@admin.com*
-password: veryhard
+### default admin's credentials:
+- username: admin
+- *email: admin@admin.com*
+- password: veryhard
 
 ## Tests
 
